@@ -1,0 +1,22 @@
+{
+  "name": "dutch-auction",
+  "version": "1.0.0",
+  "description": "|   Nom   | Prénom | |---------|--------| |   Doe   |  Jane  |",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "ethereumjs-tx": "^2.1.2",
+    "ethereumjs-util": "^7.1.5",
+    "express": "^4.18.2",
+    "web3": "^4.4.0"
+  }
+}

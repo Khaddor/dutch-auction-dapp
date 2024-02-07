@@ -1,0 +1,50 @@
+<!-- views/auction.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auction Page</title>
+</head>
+<body>
+    <h1>Auction Details</h1>
+
+        <p id="currentPrice">Current Price: <%= currentPrice %> ETH</p>
+        <p>Reserve Price: <%= reservePrice %> ETH</p>
+        <p>Bidding Interval: <%= biddingInterval %> seconds</p>
+
+        <!-- Add an input field for bid amount -->
+        <label for="bidAmount">Bid Amount (ETH): </label>
+        <input type="number" id="bidAmount" step="0.01" required>
+
+        <!-- Add a "Place a Bid" button -->
+        <button onclick="placeBid()">Place a Bid</button>
+
+        <!-- Add a button to manually refresh the page -->
+        <button onclick="refreshPage()">Get Current Price</button>
+
+    <script>
+        // Function to refresh the page
+        function refreshPage() {
+            location.reload();
+        }
+
+        // Function to place a bid
+        function placeBid() {
+            // Get the bid amount from the input field
+            const bidAmount = parseFloat(document.getElementById('bidAmount').value);
+
+            // Check if the bid amount is higher than the current price
+            if (bidAmount > <%= currentPrice %>) {
+                alert('Bid placed successfully! Auction will be closed.');
+                alert('Winning price is : ' + bidAmount);
+
+                // You may want to implement the logic to close the auction here
+                location.reload(); // Reload the page to show the closed message
+            } else {
+                alert('Bid amount must be higher than the current price.');
+            }
+        }
+    </script>
+</body>
+</html>
