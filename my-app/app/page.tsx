@@ -1,15 +1,18 @@
-// pages/MyPage.js
+// pages/Page.js
 import React from 'react';
 import AuthComponent from './AuthComponent';
+import Navbar from './Navbar';
+import Link from 'next/link';
 
-const MyPage = () => {
+const Page = () => {
   return (
     <div>
       <h1>Your Page Title</h1>
+      <Navbar />
       <AuthComponent />
-      {/* Add other components or features here */}
+      {/* <Link href="/example">Go to Test</Link> */}
     </div>
   );
 };
 
-export default MyPage;
+export default Page;

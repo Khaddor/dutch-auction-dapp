@@ -9,10 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@chakra-ui/react": "^2.8.2",
+    "@headlessui/react": "^1.7.18",
     "@openzeppelin/network": "^0.4.3",
-    "next": "14.1.0",
+    "flowbite-react": "^0.7.2",
+    "next": "^14.1.0",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "web3": "^4.4.0"
   },
   "devDependencies": {
     "@types/node": "^20",

@@ -2,7 +2,7 @@
   "name": "dutch-auction",
   "version": "1.0.0",
   "description": "|   Nom   | Prénom | |---------|--------| |   Doe   |  Jane  |",
-  "main": "truffle-config.js",
+  "main": "truffle-config.cjs",
   "directories": {
     "test": "test"
   },
@@ -12,11 +12,21 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "type": "commonjs",
   "dependencies": {
+    "@babel/core": "^7.23.9",
+    "@babel/preset-react": "^7.23.3",
+    "@babel/register": "^7.23.7",
     "ejs": "^3.1.9",
     "ethereumjs-tx": "^2.1.2",
     "ethereumjs-util": "^7.1.5",
-    "express": "^4.18.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-web3": "^1.2.0",
     "web3": "^4.4.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.23.9",
+    "@babel/node": "^7.23.9"
   }
 }

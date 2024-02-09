@@ -3,17 +3,26 @@ pragma solidity ^0.8.0;
 
 contract DutchAuction {
     address public seller;
-    address public highestBidder;
+
+    // Array to store auction details
+    struct Auction {
+        uint256 id;
+        address highestBidder;
+        uint256 currentPrice;
+        bool ended;
+    }
+
+    Auction[] public auctions; // Array to store all auctions
+
     uint256 public startingPrice;
     uint256 public reservePrice;
-    uint256 public currentPrice;
     uint256 public biddingInterval;
     uint256 public auctionEndTime;
 
     bool public auctionEnded;
 
-    event BidPlaced(address bidder, uint256 amount);
-    event AuctionEnded(address winner, uint256 amount);
+    event BidPlaced(address indexed bidder, uint256 amount, uint256 auctionId);
+    event AuctionEnded(address indexed winner, uint256 amount, uint256 auctionId);
 
     modifier onlySeller() {
         require(msg.sender == seller, "Only the seller can call this function");
@@ -39,32 +48,54 @@ contract DutchAuction {
         seller = msg.sender;
         startingPrice = _startingPrice;
         reservePrice = _reservePrice;
-        currentPrice = _startingPrice;
         biddingInterval = _biddingInterval;
         auctionEndTime = block.timestamp + _auctionDuration;
+
+        // Create an initial auction
+        createAuction();
     }
 
-    function placeBid() external payable onlyBeforeEnd {
-        require(msg.value >= currentPrice, "Bid amount is too low");
-
-        if (msg.value > currentPrice) {
-            currentPrice = msg.value;
-            highestBidder = msg.sender;
-            emit BidPlaced(msg.sender, msg.value);
-        }
+    function createAuction() internal {
+        uint256 auctionId = auctions.length;
+        auctions.push(Auction(auctionId, address(0), startingPrice, false));
     }
 
-    function endAuction() external onlySeller onlyAfterEnd {
-        require(!auctionEnded, "Auction already ended");
-        
-        if (highestBidder == address(0)) {
+    function getAllAuctions() external view returns (Auction[] memory) {
+        return auctions;
+    }
+
+    function placeBid(uint256 auctionId) external payable onlyBeforeEnd {
+    require(auctionId < auctions.length, "Invalid auction ID");
+    Auction storage currentAuction = auctions[auctionId];
+    
+    require(!currentAuction.ended, "Auction has already ended");
+    require(msg.value >= currentAuction.currentPrice, "Bid amount is too low");
+
+    if (msg.value > currentAuction.currentPrice) {
+        currentAuction.currentPrice = msg.value;
+        currentAuction.highestBidder = msg.sender;
+        emit BidPlaced(msg.sender, msg.value, auctionId);
+    }
+}
+
+
+    function endAuction(uint256 auctionId) external onlySeller onlyAfterEnd {
+        require(auctionId < auctions.length, "Invalid auction ID");
+        Auction storage currentAuction = auctions[auctionId];
+
+        require(!currentAuction.ended, "Auction already ended");
+
+        if (currentAuction.highestBidder == address(0)) {
             // No bids received, auction unsuccessful
-            auctionEnded = true;
+            currentAuction.ended = true;
         } else {
             // Transfer the item to the highest bidder
-            payable(seller).transfer(currentPrice);
-            emit AuctionEnded(highestBidder, currentPrice);
-            auctionEnded = true;
+            payable(seller).transfer(currentAuction.currentPrice);
+            emit AuctionEnded(currentAuction.highestBidder, currentAuction.currentPrice, auctionId);
+            currentAuction.ended = true;
+
+            // Create a new auction after ending the current one
+            createAuction();
         }
     }
 }
