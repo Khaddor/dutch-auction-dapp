@@ -1,7 +1,9 @@
 // pages/auctions.js
 'use client'
 import React, { useEffect, useState } from 'react';
-import { getAuctions } from '/home/mehdi/Documents/workspace/blockchain/dutch-auction-dapp/my-app/utils/web3.js';
+import { getAuctions } from '../../utils/web3';
+import Navbar from '../Navbar';
+
 
 const AuctionsPage = () => {
   const [auctions, setAuctions] = useState([]);
@@ -20,7 +22,9 @@ const AuctionsPage = () => {
   }, []);
 
   return (
+    
     <div>
+      <Navbar/>
       <h1>Auctions</h1>
       <ul>
         {auctions.map((auction) => (

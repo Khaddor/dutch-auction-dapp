@@ -12,6 +12,9 @@ const Navbar = () => {
         <li>
           <Link href="/auctions">Auctions</Link>
         </li>
+        <li>
+          <Link href="/newAuction">New Auction</Link>
+        </li>
       </ul>
     </nav>
   );
