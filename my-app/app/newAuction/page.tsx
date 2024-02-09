@@ -1,7 +1,8 @@
 'use client'
 import React, { useState } from 'react';
-import { createAuction } from '../../utils/web3'; 
+import { getAuctions, createAuction } from '../../utils/web3';
 import Navbar from '../Navbar';
+
 
 
 const CreateAuctionComponent = () => {
@@ -14,7 +15,7 @@ const CreateAuctionComponent = () => {
         event.preventDefault();
 
         try {
-            await createAuction(startingPrice, reservePrice, biddingInterval, auctionDuration); // Call the createAuction function with parameters
+            await createAuction(startingPrice, reservePrice, biddingInterval, auctionDuration); 
             alert('Auction created successfully!');
             // Optionally, you can redirect the user or perform other actions after creating the auction
         } catch (error) {
