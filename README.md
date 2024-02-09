@@ -4,43 +4,53 @@
 |---------|--------|
 |   KHADDOR  |  EL Mehdi  |
 
-Le TP est à réaliser individuellement.
 
 ## Présentation
 
-Ce TP est le prolongement du premier et consiste à créer une application décentralisée (dApp) permettant de donner vie à votre Smart Contract (SC). Celle-ci doit pouvoir proposer les fonctionnalités suivantes.
+Ce projet constitue la réalisation d'une application décentralisée (dApp) pour la gestion d'enchères hollandaises. L'objectif est de créer une interface conviviale permettant aux utilisateurs d'interagir avec un Smart Contract déployé sur la blockchain Ethereum. Les principales fonctionnalités incluent l'authentification via MetaMask, la gestion des enchères, et un tableau de bord récapitulatif des activités des utilisateurs.
 
+## Fonctionnalités
 ### Authentification et profil
-
-Il doit être possible de se connecter à l'aide de son portefeuille MetaMask. Vous pouvez utiliser la SDK de [MetaMask](https://docs.metamask.io/wallet/how-to/connect/set-up-sdk/).
-
-Les données du portefeuille telles que la clé publique et le solde en ETH doivent être visibles depuis l'application.
+- Connexion via MetaMask : Les utilisateurs peuvent se connecter à l'application en utilisant leur portefeuille MetaMask.
+- Affichage des données du portefeuille : Les informations telles que la clé publique et le solde en ETH sont visibles depuis l'application.
 
 ### Enchères
+- Liste des enchères disponibles : Une vue liste permet d'afficher toutes les enchères disponibles.
+- Création d'une enchère : Les propriétaires peuvent créer une nouvelle enchère en définissant les paramètres souhaités.
+- Tableau de bord : Un tableau de bord offre une vue récapitulative des enchères gagnées, en cours ou perdues.
 
-La gestion des enchères est composée des éléments suivants :
-- Une liste des enchères disponibles ;
-- Créer une enchère avec les paramètres souhaités par le propriétaire ;
-- Participer à une ou plusieurs enchères ;
-- Pouvoir enchérir ;
-- Cloturer une enchère (versement des fonds au propriétaire de l'enchère) ;
-- Un tableau de bord permettant de visualiser les enchères gagnées, en cours ou perdues.
+### Navigation 
+- Barre de navigation : Une barre de navigation est disponible pour accéder facilement aux différentes fonctionnalités de l'application.
 
-*N'oubliez pas de créer une barre de navigation pour accéder aux différentes fonctionnalités.*
+### Interaction avec la blockchain 
+- Utilisation de bibliothèques : L'application interagit avec la blockchain Ethereum en utilisant des bibliothèques web3js.
 
-Pour interagir avec la blockchain depuis votre application, il existe plusieurs bibliothèques telles que [ethers](https://docs.ethers.org/v5/) ou encore [web3js](https://web3js.readthedocs.io/en/v1.10.0/).
+## Application 
 
-## Restitution
+#### Connection au Wallet 
+![ConnectionWallet](screens/1.png)
 
-**Un rapport concernant l'utilisation de l'application sera à restituer 3 semaines après le dernier TP.**
+#### Informations d'utilisateur
+- Addresse et solde du portefeulle MetaMask
+![funds](screens/2.png)
 
-Pour ce projet, il est imposé d'utiliser le framework [NextJS](https://nextjs.org/) qui utilise la bibliothèque [React](https://react.dev/).
+#### Création d'un nouveau enchère
+![newAuction](screens/3.png)
+![Auctions](screens/4.png)
 
-## Installation
+#### Affichage des enchères
+![Auctions](screens/5.png)
+![Auctions](screens/6.png)
 
-Pour créer une application NextJS, utilisez la commande suivante : 
-```shell
-npx create-next-app@latest
-```
+### Installation 
+1. Clonage du projet : Clonez ce projet dans le répertoire de votre choix
+` git clone `
+2. Installation des dépendances : Exécutez la commande suivante pour installer les dépendances nécessaires au projet `npm install`
+3. Lancement de l'application : `npm run dev`
 
-A vous de jouer !
+
+
+
+
+
+
