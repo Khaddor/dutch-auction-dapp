@@ -1,4 +1,3 @@
-// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
 contract DutchAuction {
@@ -9,12 +8,12 @@ contract DutchAuction {
         uint256 id;
         address highestBidder;
         uint256 currentPrice;
+        uint256 startingPrice; 
         bool ended;
     }
 
-    Auction[] public auctions; // Array to store all auctions
+    Auction[] public auctions; 
 
-    uint256 public startingPrice;
     uint256 public reservePrice;
     uint256 public biddingInterval;
     uint256 public auctionEndTime;
@@ -46,18 +45,16 @@ contract DutchAuction {
         uint256 _auctionDuration
     ) {
         seller = msg.sender;
-        startingPrice = _startingPrice;
         reservePrice = _reservePrice;
         biddingInterval = _biddingInterval;
         auctionEndTime = block.timestamp + _auctionDuration;
 
-        // Create an initial auction
-        createAuction();
+        createAuction(_startingPrice);
     }
 
-    function createAuction() internal {
+    function createAuction(uint256 _startingPrice) internal {
         uint256 auctionId = auctions.length;
-        auctions.push(Auction(auctionId, address(0), startingPrice, false));
+        auctions.push(Auction(auctionId, address(0), _startingPrice, _startingPrice, false));
     }
 
     function getAllAuctions() external view returns (Auction[] memory) {
@@ -65,19 +62,17 @@ contract DutchAuction {
     }
 
     function placeBid(uint256 auctionId) external payable onlyBeforeEnd {
-    require(auctionId < auctions.length, "Invalid auction ID");
-    Auction storage currentAuction = auctions[auctionId];
-    
-    require(!currentAuction.ended, "Auction has already ended");
-    require(msg.value >= currentAuction.currentPrice, "Bid amount is too low");
+        require(auctionId < auctions.length, "Invalid auction ID");
+        Auction storage currentAuction = auctions[auctionId];
+        
+        require(msg.value >= currentAuction.currentPrice, "Bid amount is too low");
 
-    if (msg.value > currentAuction.currentPrice) {
-        currentAuction.currentPrice = msg.value;
-        currentAuction.highestBidder = msg.sender;
-        emit BidPlaced(msg.sender, msg.value, auctionId);
+        if (msg.value > currentAuction.currentPrice) {
+            currentAuction.currentPrice = msg.value;
+            currentAuction.highestBidder = msg.sender;
+            emit BidPlaced(msg.sender, msg.value, auctionId);
+        }
     }
-}
-
 
     function endAuction(uint256 auctionId) external onlySeller onlyAfterEnd {
         require(auctionId < auctions.length, "Invalid auction ID");
@@ -86,16 +81,13 @@ contract DutchAuction {
         require(!currentAuction.ended, "Auction already ended");
 
         if (currentAuction.highestBidder == address(0)) {
-            // No bids received, auction unsuccessful
             currentAuction.ended = true;
         } else {
-            // Transfer the item to the highest bidder
             payable(seller).transfer(currentAuction.currentPrice);
             emit AuctionEnded(currentAuction.highestBidder, currentAuction.currentPrice, auctionId);
             currentAuction.ended = true;
 
-            // Create a new auction after ending the current one
-            createAuction();
+            createAuction(currentAuction.startingPrice);
         }
     }
 }
