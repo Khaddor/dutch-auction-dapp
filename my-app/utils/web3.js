@@ -5,8 +5,8 @@ import DutchAuctionABI from '../../build/contracts/DutchAuction.json';
 const web3 = new Web3('http://127.0.0.1:7545');
 
 const getAuctions = async () => {
-  const contractAddress = '0x20509621722766ce70d121Cf4f99EBf7d8dEB31d';
-  // const contractAddress = '0x7350789a441D5b0bd21817745B86E2e080C41CF8';
+  // const contractAddress = '0x20509621722766ce70d121Cf4f99EBf7d8dEB31d';
+  const contractAddress = '0x7350789a441D5b0bd21817745B86E2e080C41CF8';
 
   
   const contractABI = DutchAuctionABI.abi;

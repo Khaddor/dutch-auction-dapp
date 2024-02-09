@@ -1,0 +1,25 @@
+/* AuthComponent.module.css */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f8f9fa; /* Light grey background */
+  }
+  
+  .auth-component {
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #dee2e6; /* Bootstrap-like border color */
+    border-radius: 8px;
+  }
+  
+  .button {
+    background-color: #007bff; /* Bootstrap primary color */
+    color: #ffffff; /* White text */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  

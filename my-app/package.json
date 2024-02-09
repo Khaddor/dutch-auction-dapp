@@ -12,10 +12,12 @@
     "@chakra-ui/react": "^2.8.2",
     "@headlessui/react": "^1.7.18",
     "@openzeppelin/network": "^0.4.3",
+    "bootstrap": "^5.3.2",
     "flowbite-react": "^0.7.2",
     "next": "^14.1.0",
     "react": "^18",
     "react-dom": "^18",
+    "sharp": "^0.33.2",
     "web3": "^4.4.0"
   },
   "devDependencies": {

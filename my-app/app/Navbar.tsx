@@ -1,19 +1,16 @@
-// components/Navbar.tsx
 import React from 'react';
 import Link from 'next/link';
 
 const Navbar = () => {
   return (
-    <nav>
-      <ul>
+    <nav className="bg-gray-200 p-4 flex items-center justify-center">
+        <a className="text-blue-500 hover:text-blue-700 mr-5"href="/">Home</a>
+      <ul className="flex items-center space-x-4">
         <li>
-          <Link href="/">Home</Link>
+            <a className="text-blue-500 hover:text-blue-700" href="/auctions">Auctions</a>
         </li>
         <li>
-          <Link href="/auctions">Auctions</Link>
-        </li>
-        <li>
-          <Link href="/newAuction">New Auction</Link>
+            <a className="text-blue-500 hover:text-blue-700" href="/newAuction">New Auction</a>
         </li>
       </ul>
     </nav>
